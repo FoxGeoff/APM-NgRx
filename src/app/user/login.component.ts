@@ -12,7 +12,7 @@ import { Store, select } from '@ngrx/store';
 export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
   errorMessage: string;
-
+  model;
   maskUserName: boolean;
 
   constructor(private store: Store<any>,
@@ -21,12 +21,24 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.resetForm();
+
     this.store.pipe(select('users')).subscribe(
       users => {
         if (users) {
           this.maskUserName = users.maskUserName;
         }
       });
+  }
+
+  resetForm() {
+    this.model = {};
+    this.model.userName = "Geoff";
+  }
+
+  getUserName() {
+    //todo
   }
 
   cancel(): void {
@@ -42,7 +54,8 @@ export class LoginComponent implements OnInit {
 
   login(loginForm: NgForm): void {
     if (loginForm && loginForm.valid) {
-      const userName = loginForm.form.value.userName;
+      var userName = this.model.userName;
+      //const userName = loginForm.form.value.userName;
       const password = loginForm.form.value.password;
       this.authService.login(userName, password);
 
