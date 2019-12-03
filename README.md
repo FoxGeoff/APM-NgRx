@@ -6,4 +6,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Example code for using NgRx
 
-Apply to Login form - maintian userName Mask state
+Task: Apply to Login form - maintian userName Mask state
