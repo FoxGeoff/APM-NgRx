@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   resetForm() {
     this.model = {};
-    this.model.userName = "Geoff";
+    //this.model.userName = "Geoff";
   }
 
   getUserName() {
@@ -48,6 +48,13 @@ export class LoginComponent implements OnInit {
   checkChanged(value: boolean): void {
     this.store.dispatch({
       type: 'MASK_USER_NAME',
+      payload: value
+    });
+  }
+
+  inputNameChanged(value: boolean): void {
+    this.store.dispatch({
+      type: 'USER_NAME',
       payload: value
     });
   }

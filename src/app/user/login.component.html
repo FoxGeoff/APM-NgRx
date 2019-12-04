@@ -11,7 +11,7 @@
           <div class="form-group row">
             <label class="col-md-2 col-form-label" for="userNameId">User Name</label>
             <div class="col-md-8">
-              <input class="form-control"
+              <input class="form-control" (change) ="inputNameChanged($event.target.value)"
                 [ngClass]="{'is-invalid': (userNameVar.touched || userNameVar.dirty) && !userNameVar.valid }"
                 id="userNameId" [type]="maskUserName ? 'password' : 'text'" placeholder="User Name (required)" required
                 ngModel name="userName" [(ngModel)]="model.userName" #userNameVar="ngModel" /> 
