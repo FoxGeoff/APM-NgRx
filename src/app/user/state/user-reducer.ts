@@ -5,7 +5,7 @@ export function reducer(state, action) {
         case 'MASK_USER_NAME':
 
             console.log('existing state: ' + JSON.stringify(state));
-            console.log('payload: ' + action.payload);
+            console.log('payload maskName: ' + action.payload);
 
             return {
                 ...state,
@@ -14,7 +14,7 @@ export function reducer(state, action) {
         case 'USER_NAME':
 
             console.log('existing state: ' + JSON.stringify(state));
-            console.log('payload: ' + action.payload);
+            console.log('payload userName: ' + action.payload);
 
             return {
                 ...state,
