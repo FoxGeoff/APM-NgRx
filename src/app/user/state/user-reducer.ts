@@ -1,4 +1,10 @@
 
+export interface userState {
+    userName: string;
+    maskUserName: boolean;
+}
+
+
 export function reducer(state, action) {
     switch (action.type) {
 

@@ -1,5 +1,17 @@
+import * as fromRoot from '../../state/app.state';
+import { Product } from '../product';
 
-export function reducer(state, action) {
+export interface State extends fromRoot.State {
+    products: ProductState;
+}
+
+export interface ProductState {
+    showProductCode: boolean;
+    currentProduct: Product;
+    products: Product[];
+}
+
+export function reducer(state: ProductState, action): ProductState {
     switch (action.type) {
 
         case 'TOGGLE_PRODUCT_CODE':
