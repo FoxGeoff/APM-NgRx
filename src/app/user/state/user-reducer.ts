@@ -2,6 +2,7 @@ import * as fromRoot from '../../state/app.state';
 //import { User } from '../user';
 import { InitialState } from '@ngrx/store/src/models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { User } from '../user';
 
 /* Lazy loading of global state */
 export interface State extends fromRoot.State {
@@ -9,13 +10,15 @@ export interface State extends fromRoot.State {
 }
 /* Lazy loading */
 export interface UserState {
-    userName: string;
+    userName: string; //TODO: remove
+    currentUser: User;
     maskUserName: boolean;
 }
 
 /* Initialization */
 const initialState: UserState = {
-    userName: "Anon",
+    userName: "Missing",
+    currentUser: new User(),
     maskUserName: true
 }
 
@@ -28,6 +31,11 @@ export const getUserName =
     createSelector(
         getUserFeatureState,
         state => state.userName
+    );
+export const getCurrentUser =
+    createSelector(
+        getUserFeatureState,
+        state => state.currentUser
     );
 export const getMaskUserName =
     createSelector(
@@ -46,6 +54,15 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 maskUserName: action.payload
+            };
+        case 'CURRENT_USER':
+
+            console.log('existing state: ' + JSON.stringify(state));
+            console.log('payload currentUser: ' + action.payload);
+
+            return {
+                ...state,
+                currentUser: action.payload
             };
         case 'USER_NAME':
 

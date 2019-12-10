@@ -31,12 +31,16 @@ export class LoginComponent implements OnInit {
     //TODO: Unsubscribe
     this.store.pipe(select(fromUser.getMaskUserName)).subscribe(
       maskUserName => this.maskUserName = maskUserName,
-  );
+    );
     //TODO: Unsubscribe
     this.store.pipe(select(fromUser.getUserName)).subscribe(
       userName => this.model.userName = userName
-  );
-}
+    );
+    //TODO: Unsubscribe
+    this.store.pipe(select(fromUser.getCurrentUser)).subscribe(
+      currentUser => this.model = currentUser
+    );
+  }
 
   resetForm() {
     this.model = new User();
