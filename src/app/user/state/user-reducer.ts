@@ -15,7 +15,7 @@ export interface UserState {
 
 /* Initialization */
 const initialState: UserState = {
-    userName: "",
+    userName: "Anon",
     maskUserName: true
 }
 

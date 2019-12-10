@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
   model: User;
   maskUserName: boolean;
-  userName: string;
 
   constructor(private store: Store<fromUser.State>,
     private authService: AuthService,
@@ -31,15 +30,13 @@ export class LoginComponent implements OnInit {
 
     //TODO: Unsubscribe
     this.store.pipe(select(fromUser.getMaskUserName)).subscribe(
-      users => {
-        if (users) {
-          maskUserName => this.maskUserName = maskUserName;
-          //this.maskUserName = users.maskUserName;
-          userName => this.userName = userName;
-          //this.model.userName =users.userName;
-        }
-      });
-  }
+      maskUserName => this.maskUserName = maskUserName,
+  );
+    //TODO: Unsubscribe
+    this.store.pipe(select(fromUser.getUserName)).subscribe(
+      userName => this.model.userName = userName
+  );
+}
 
   resetForm() {
     this.model = new User();
@@ -65,9 +62,9 @@ export class LoginComponent implements OnInit {
 
   login(loginForm: NgForm): void {
     if (loginForm && loginForm.valid) {
-      this.userName = this.model.userName;
+      const userName = this.model.userName;
       const password = loginForm.form.value.password;
-      this.authService.login(this.userName, password);
+      this.authService.login(userName, password);
 
       if (this.authService.redirectUrl) {
         this.router.navigateByUrl(this.authService.redirectUrl);
