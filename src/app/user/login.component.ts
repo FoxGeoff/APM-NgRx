@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from './auth.service';
 import { Store, select } from '@ngrx/store';
+import { User } from './user';
+import { UserData } from './user-data';
 
 @Component({
   templateUrl: './login.component.html',
@@ -12,8 +14,9 @@ import { Store, select } from '@ngrx/store';
 export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
   errorMessage: string;
-  model: any;
+  model: User;
   maskUserName: boolean;
+  userName: string;
 
   constructor(private store: Store<any>,
     private authService: AuthService,
@@ -34,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   resetForm() {
-    this.model = {};
+    this.model = new User();
   }
 
   cancel(): void {
@@ -57,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   login(loginForm: NgForm): void {
     if (loginForm && loginForm.valid) {
-      var userName = this.model.userName;
+      userName = this.model.userName;
       const password = loginForm.form.value.password;
       this.authService.login(userName, password);
 

@@ -1,5 +1,5 @@
 /* Defines the user entity */
-export interface User {
+export class User {
     id: number;
     userName: string;
     isAdmin: boolean;

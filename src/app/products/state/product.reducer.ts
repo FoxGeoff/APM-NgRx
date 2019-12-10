@@ -3,7 +3,7 @@ import { Product } from '../product';
 import { InitialState } from '@ngrx/store/src/models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-/* Lazy loading of globe state */
+/* Lazy loading of global state */
 export interface State extends fromRoot.State {
     products: ProductState;
 }

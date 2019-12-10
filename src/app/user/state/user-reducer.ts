@@ -1,11 +1,41 @@
+import * as fromRoot from '../../state/app.state';
+//import { User } from '../user';
+import { InitialState } from '@ngrx/store/src/models';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-export interface userState {
+/* Lazy loading of global state */
+export interface State extends fromRoot.State {
+    users: UserState;
+}
+/* Lazy loading */
+export interface UserState {
     userName: string;
     maskUserName: boolean;
 }
 
+/* Initialization */
+const initialState: UserState = {
+    userName: "",
+    maskUserName: true
+}
 
-export function reducer(state, action) {
+/* Feature Selector */
+const getUserFeatureState =
+    createFeatureSelector<UserState>('users');
+
+/* Compose Selector(s) - export */
+export const getUserName =
+    createSelector(
+        getUserFeatureState,
+        state => state.userName
+    );
+export const getMaskUserName =
+    createSelector(
+        getUserFeatureState,
+        state => state.maskUserName
+    );
+
+export function reducer(state = initialState, action) {
     switch (action.type) {
 
         case 'MASK_USER_NAME':
