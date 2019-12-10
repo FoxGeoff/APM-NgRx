@@ -7,6 +7,8 @@ import { Store, select } from '@ngrx/store';
 import { User } from './user';
 import { UserData } from './user-data';
 
+import * as fromUser from '../user/state/user-reducer';
+
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit {
   maskUserName: boolean;
   userName: string;
 
-  constructor(private store: Store<any>,
+  constructor(private store: Store<fromUser.State>,
     private authService: AuthService,
     private router: Router) {
   }
@@ -27,11 +29,14 @@ export class LoginComponent implements OnInit {
 
     this.resetForm();
 
-    this.store.pipe(select('users')).subscribe(
+    //TODO: Unsubscribe
+    this.store.pipe(select(fromUser.getMaskUserName)).subscribe(
       users => {
         if (users) {
-          this.maskUserName = users.maskUserName;
-          this.model.userName =users.userName;
+          maskUserName => this.maskUserName = maskUserName;
+          //this.maskUserName = users.maskUserName;
+          userName => this.userName = userName;
+          //this.model.userName =users.userName;
         }
       });
   }
@@ -60,9 +65,9 @@ export class LoginComponent implements OnInit {
 
   login(loginForm: NgForm): void {
     if (loginForm && loginForm.valid) {
-      userName = this.model.userName;
+      this.userName = this.model.userName;
       const password = loginForm.form.value.password;
-      this.authService.login(userName, password);
+      this.authService.login(this.userName, password);
 
       if (this.authService.redirectUrl) {
         this.router.navigateByUrl(this.authService.redirectUrl);
