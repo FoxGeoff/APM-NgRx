@@ -50,6 +50,11 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['welcome']);
   }
 
+  /*  
+  checkChanged(value: boolean): void {
+      this.store.dispatch(new userActions.MaskUserName(value));
+  } */
+
   checkChanged(value: boolean): void {
     this.store.dispatch({
       type: 'MASK_USER_NAME',
