@@ -2,6 +2,7 @@ import * as fromRoot from '../../state/app.state';
 import { Product } from '../product';
 import { InitialState } from '@ngrx/store/src/models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ProductActionTypes } from './product.actions';
 
 /* Lazy loading of global state */
 export interface State extends fromRoot.State {
@@ -45,14 +46,38 @@ export const getProducts =
 export function reducer(state = initialState, action): ProductState {
     switch (action.type) {
 
-        case 'TOGGLE_PRODUCT_CODE':
-
-            console.log('existing state: ' + JSON.stringify(state));
-            console.log('payload ToggelProductLoad: ' + action.payload);
+        case ProductActionTypes.ToggleProductCode:
 
             return {
                 ...state,
                 showProductCode: action.payload
+            };
+
+        case ProductActionTypes.SetCurrentProduct:
+
+            return {
+                ...state,
+                currentProduct: { ...action.payload }
+            };
+
+        case ProductActionTypes.ClearCurrentProduct:
+
+            return {
+                ...state,
+                currentProduct: null
+            };
+
+        case ProductActionTypes.InitializeCurrentProduct:
+
+            return {
+                ...state,
+                currentProduct: {
+                    id: 0,
+                    productName: '',
+                    productCode: 'New',
+                    description: '',
+                    starRating: 0
+                }
             };
 
         default:
