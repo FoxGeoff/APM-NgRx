@@ -7,6 +7,7 @@ import { ProductService } from '../product.service';
 import { Store, select } from '@ngrx/store';
 
 import * as fromProduct from '../state/product.reducer';
+import * as productActions from '../state/product.actions';
 
 @Component({
   selector: 'pm-product-list',
@@ -49,10 +50,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   checkChanged(value: boolean): void {
+    this.store.dispatch(new productActions.ToggleProductCode(value));
+   /* 
     this.store.dispatch({
       type: 'TOGGLE_PRODUCT_CODE',
       payload: value
-    });
+    }); 
+    */
   }
 
   newProduct(): void {
