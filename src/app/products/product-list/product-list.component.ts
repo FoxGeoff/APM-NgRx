@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -54,11 +54,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   newProduct(): void {
-    this.productService.changeSelectedProduct(this.productService.newProduct());
+    /* Using Redux Pattern */
+    this.store.dispatch(new productActions.InitializeCurrentProduct());
+    /* Using the service */
+    //this.productService.changeSelectedProduct(this.productService.newProduct());
   }
 
   productSelected(product: Product): void {
-    this.productService.changeSelectedProduct(product);
+    /* Using Redux Pattern */
+    this.store.dispatch(new productActions.SetCurrentProduct(product));
+    /* Using the service */
+    //this.productService.changeSelectedProduct(product);
   }
 
 }
