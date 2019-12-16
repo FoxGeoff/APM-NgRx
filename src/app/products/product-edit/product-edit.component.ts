@@ -68,7 +68,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.store.pipe(select(fromProduct.getCurrentProduct)).subscribe(
       currentProduct => this.displayProduct(currentProduct)
     );
-    
+
     // Watch for value changes
     this.productForm.valueChanges.subscribe(
       value => this.displayMessage = this.genericValidator.processMessages(this.productForm)
@@ -118,10 +118,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   deleteProduct(): void {
     if (this.product && this.product.id) {
       if (confirm(`Really delete the product: ${this.product.productName}?`)) {
-        this.productService.deleteProduct(this.product.id).subscribe({
-          next: () => this.productService.changeSelectedProduct(null),
-          error: err => this.errorMessage = err.error
-        });
+        this.productService.deleteProduct(this.product.id).subscribe(
+          () => this.store.dispatch(new productActions.ClearCurrentProduct()),
+          (err: any) => this.errorMessage = err.error
+        );
       }
     } else {
       // No need to delete, it was never saved
