@@ -125,7 +125,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       }
     } else {
       // No need to delete, it was never saved
-      this.productService.changeSelectedProduct(null);
+      this.productService.   .changeSelectedProduct(null);
     }
   }
 
