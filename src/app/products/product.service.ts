@@ -27,17 +27,6 @@ export class ProductService {
       );
   }
 
-  // Return an initialized product
-  newProduct(): Product {
-    return {
-      id: 0,
-      productName: '',
-      productCode: 'New',
-      description: '',
-      starRating: 0
-    };
-  }
-
   createProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     product.id = null;
