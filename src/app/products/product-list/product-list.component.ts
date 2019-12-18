@@ -30,16 +30,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private productService: ProductService) { }
 
   ngOnInit(): void {
-    
+
     /* Using Redux Pattern */
     //TODO: Unsubscribe
     this.store.pipe(select(fromProduct.getCurrentProduct)).subscribe(
       currentProduct => this.selectedProduct = currentProduct
     );
-     /* Using the service */
+    /* Using the service */
     //this.sub = this.productService.selectedProductChanges$.subscribe(
-      //selectedProduct => this.selectedProduct = selectedProduct
+    //selectedProduct => this.selectedProduct = selectedProduct
     //);
+    /****************************************************** */
 
     this.productService.getProducts().subscribe({
       next: (products: Product[]) => this.products = products,
@@ -74,4 +75,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     //this.productService.changeSelectedProduct(product);
   }
 
+  //TODO: WIP
+  productsLoad(products: Product[]): void {
+    this.store.dispatch(new productActions.Load());
+  }
 }
