@@ -20,7 +20,7 @@ const initialState: ProductState = {
     showProductCode: true,
     currentProduct: null,
     products: []
-}
+};
 
 /* Feature Selector */
 const getProductFeatureState =
@@ -79,6 +79,13 @@ export function reducer(state = initialState, action): ProductState {
                     starRating: 0
                 }
             };
+
+        case ProductActionTypes.LoadSuccess:
+
+        return {
+          ...state,
+          products: action.payload
+        }
 
         default:
             return state;
