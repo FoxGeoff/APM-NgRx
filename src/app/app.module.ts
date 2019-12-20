@@ -21,6 +21,7 @@ import { UserModule } from './user/user.module';
 /* Redux Store Devtools */
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';;
 import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { environment } from 'src/environments/environment';
     UserModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       name: 'Geoffs Demo NgRx',
       maxAge: 25,
