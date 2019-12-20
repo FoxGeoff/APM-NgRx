@@ -85,7 +85,7 @@ export function reducer(state = initialState, action): ProductState {
         return {
           ...state,
           products: action.payload
-        }
+        };
 
         default:
             return state;
