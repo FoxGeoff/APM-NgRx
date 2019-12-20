@@ -19,7 +19,7 @@ import { StoreModule } from '@ngrx/store';
 /* Feature Modules */
 import { UserModule } from './user/user.module';
 /* Redux Store Devtools */
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';;
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
